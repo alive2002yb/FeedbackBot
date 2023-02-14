@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "mongoose": "^6.9.1",
+    "python-shell": "^3.0.1",
+    "telegraf": "^4.11.2"
+  }
+}
