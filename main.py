@@ -19,26 +19,11 @@ import pickle
 import warnings
 warnings.filterwarnings("ignore")
 
-# Download dependency - One time run
-'''for dependency in (
-    "brown",
-    "names",
-    "wordnet",
-    "averaged_perceptron_tagger",
-    "universal_tagset",
-    "stopwords",
-    "punkt",
-    "omw-1.4"
-):
-    nltk.download(dependency)'''
-
 # seeding
 np.random.seed(123)
 
 df = pd.read_csv("final.csv")
 print(df.shape)
-
-# Dropping all columns except Class and Tweet. 
 
 # Class: 
 
@@ -78,11 +63,11 @@ def text_cleaning(text):
     # Return a list of words
     return(text)
 
-df["cleaned_tweet"] = df["text"].apply(text_cleaning)
+df["cleaned_txt"] = df["text"].apply(text_cleaning)
 ## Applying the function on the text column
 
-X = df["cleaned_tweet"] 
-## The model will be trained on the cleaned tweets
+X = df["cleaned_txt"] 
+## The model will be trained on the cleaned txts
 y = df['label'].values
 ## There are three values that can be predicted:
 ## 0 -> hate_speech, 1 -> Abusive 2 -> Neither

@@ -12,7 +12,7 @@ import sys
 
 app = FastAPI(
     title="Sentiment Model API",
-    description="A simple API that use NLP model to predict the sentiment of the movie's reviews",
+    description="A simple API that use NLP model to predict the sentiment of the Feedbacks",
     version="0.1",
 )
 

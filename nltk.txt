@@ -1,8 +1,0 @@
-brown
-names
-wordnet
-averaged_perceptron_tagger
-universal_tagset
-stopwords
-punkt
-omw-1.4
