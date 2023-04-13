@@ -74,29 +74,34 @@ bot.on("text", async(ctx) => {
         }
     } else {
         const currentUser = await User.findOne({ id: ctx.message.from.id });
-        const prediction = await runPythonScript(ctx.message.text);
-        console.log(ctx.message.text);
-        result = parseInt(prediction.toString());
-        if (result == 0) {
-            currentUser.numberWarnings++;
-            ctx.reply(`Please refrain from using Hatespeech 🚫⛔\nNumber of Warnings: ${currentUser.numberWarnings}\nFeedback not recieved`);
-            ctx
-                .deleteMessage(ctx.message.message_id, ctx.message.chat.id)
-                .catch((e) => console.log(e));
-            deletePreviousMessage(prevMessageId, ctx.message.chat.id, ctx.message.message_id);
-        } else if (result == 1) {
-            currentUser.numberWarnings++;
-            ctx.reply(`Please refrain from using Abusive languages 🚫⛔\nNumber of Warnings: ${currentUser.numberWarnings}\nFeedback not recieved`);
-            ctx
-                .deleteMessage(ctx.message.message_id, ctx.message.chat.id)
-                .catch((e) => console.log(e));
+        try {
 
-            deletePreviousMessage(prevMessageId, ctx.message.chat.id, ctx.message.message_id);
-        } else if (result == 2) {
-            currentUser.feedback = ctx.message.text;
-            ctx.reply(`Thank you for your valuable feedback😃`);
-        } else {
-            ctx.reply(`Could not understand input😖`);
+            const prediction = await runPythonScript(ctx.message.text);
+            console.log(ctx.message.text);
+            result = parseInt(prediction.toString());
+            if (result == 0) {
+                currentUser.numberWarnings++;
+                ctx.reply(`Please refrain from using Hatespeech 🚫⛔\nNumber of Warnings: ${currentUser.numberWarnings}\nFeedback not recieved`);
+                ctx
+                    .deleteMessage(ctx.message.message_id, ctx.message.chat.id)
+                    .catch((e) => console.log(e));
+                deletePreviousMessage(prevMessageId, ctx.message.chat.id, ctx.message.message_id);
+            } else if (result == 1) {
+                currentUser.numberWarnings++;
+                ctx.reply(`Please refrain from using Abusive languages 🚫⛔\nNumber of Warnings: ${currentUser.numberWarnings}\nFeedback not recieved`);
+                ctx
+                    .deleteMessage(ctx.message.message_id, ctx.message.chat.id)
+                    .catch((e) => console.log(e));
+
+                deletePreviousMessage(prevMessageId, ctx.message.chat.id, ctx.message.message_id);
+            } else if (result == 2) {
+                currentUser.feedback = ctx.message.text;
+                ctx.reply(`Thank you for your valuable feedback😃`);
+            } else {
+                ctx.reply(`Could not understand input😖`);
+            }
+        } catch (error) {
+            console.log(error);
         }
         await currentUser.save();
     }

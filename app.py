@@ -7,10 +7,8 @@ from nltk.stem import WordNetLemmatizer
 import re
 from os.path import dirname, join, realpath
 import joblib
-import uvicorn
 from fastapi import FastAPI
 import sys
-import json
 
 app = FastAPI(
     title="Sentiment Model API",
@@ -65,4 +63,4 @@ if __name__ == '__main__':
     if len(sys.argv) > 1:
         a = sys.argv[1]
         result = predict_sentiment(a)
-        print(result,flush=True)
+        print(result)
