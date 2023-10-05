@@ -5,8 +5,8 @@ const User = require("./user.js");
 const fetch = require("node-fetch");
 const { spawn } = require('child_process');
 
-const BOT_TOKEN = `5995777962:AAFTx2BlzU2eqY7iI-gfGWmDAAcl9fWYYaM`;
-const DB = `mongodb+srv://admin:admin@cluster0.wevqxmd.mongodb.net/?retryWrites=true&w=majority`;
+const BOT_TOKEN = `your bot token`;
+const DB = `your database token`;
 mongoose
     .connect(DB, {
         useNewUrlParser: true,
